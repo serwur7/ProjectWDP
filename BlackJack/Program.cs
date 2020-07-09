@@ -30,18 +30,48 @@ namespace BlackJack
                 player.addCard(deck.drawCard());
                 bool dealerEnd = false;
                 bool playerEnd = false;
+                bool check = true;
 
-                compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd);
-               
-                while (true)
+                if (compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd) == true)
                 {
+                    check = false;
+                    
+                    showHand(dealer, false, true);
+                    showHand(player, true, true);
+                    Console.WriteLine("Press any key to continue. . . ");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+
+                while (check)
+                {
+                    showHand(dealer, false, true);
+                    showHand(player, true, true);
                     if (dealerEnd == false)
                     {
                         if (dealer.handValue < 17) ///diler dobiera karty dopoki nie skonczy grac
                         {
+                            Console.WriteLine("Wcisnij dowolny klawisz zeby kontynuowac ");
+                            Console.ReadLine();
+                            Console.Clear();
+                            Console.WriteLine("DILER dobrał karte.....");
                             dealer.addCard(deck.drawCard());
-                            Console.WriteLine("DILER dobiera karte.....");
-                        }
+                            if (compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd) == true)
+                            {
+                                showHand(dealer, false, true);
+                                showHand(player, true, true);
+                                Console.WriteLine("Press any key to continue. . . ");
+                                Console.ReadLine();
+                                Console.Clear();
+                                if (dealer.handValue != 21)
+                                {
+                                    
+                                    break;
+                                }
+                            }
+
+                        }///jak diler dobiera karty jest ok a jak nie chce to wydupca duzo rzeczy na ekran
+                        ///najs
                         else
                         {
                             Console.WriteLine("DILER zakonczyl dobieranie kart");
@@ -55,24 +85,34 @@ namespace BlackJack
                         Console.WriteLine("Czy chciałbyś dobrać kartę?(t/n)");
                         if (Console.ReadLine() == "t")
                         {
+                            Console.Clear();
                             player.addCard(deck.drawCard());
+                            if (compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd) == true)
+                            {
+                                showHand(dealer, false, true);
+                                showHand(player, true, true);
+                                Console.WriteLine("Press any key to continue. . . ");
+                                Console.ReadLine();
+                                Console.Clear();
+                                break;
+                            }
                         }
                         else
                         {
                             Console.WriteLine("Końcowa wartość kart w Twojej ręce to: " + player.handValue);
                             playerEnd = true;
                         }
-                       /// gracza trzeba ukrócić
                     }
                     if (dealerEnd && playerEnd)
                     {
-
-                       break;
+                        compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd);
+                        Console.WriteLine("Wcisnij dowolny klawisz zeby kontynuowac ");
+                        Console.ReadLine();
+                        Console.Clear();
+                        break;
                     }
-                    
-                    Console.Clear();
-
                 }
+                
             }
         }
 
@@ -88,10 +128,20 @@ namespace BlackJack
                 Console.WriteLine("Gracz zwyciężył!");
                 return true;
             }
+            else if(p > 21)
+            {
+                Console.WriteLine("Gracz przekroczył 21 i przegrywa");
+                return true;
+            }
+            else if(d > 21)
+            {
+                Console.WriteLine("DILER przekroczył 21 i przegrywa");
+                return true;
+            }
             else if(d == 21)
             {
-                Console.WriteLine("Diler wygrał...");
-                return true;
+               //Console.WriteLine("Diler wygrał...");
+               return true;
             }
             else if(de && pe)
             {
@@ -109,6 +159,7 @@ namespace BlackJack
                 }
                 return true;
             }
+
             return false;
         }
 
