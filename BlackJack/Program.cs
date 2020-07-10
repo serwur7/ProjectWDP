@@ -84,6 +84,7 @@ namespace BlackJack
                             Console.WriteLine("");
                             Console.WriteLine(compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd));
                             Console.WriteLine("Wciśnij dowolny klawisz by rozpocząć nową rozgrywkę.");
+
                             Console.ReadLine();
                             Console.Clear();
                             break;
@@ -206,7 +207,16 @@ namespace BlackJack
                     Console.Write(" * ");
                 }
             }
-            Console.WriteLine("\nWartosc ręki wynosi: " + hand.handValue);
+            if (isPlayer || endGame)
+            {
+                Console.WriteLine("\nWartosc ręki wynosi: " + hand.handValue);
+            }
+            else
+            {
+                Console.WriteLine("\nWartosc ręki wynosi: xXx");
+            }
         }
     }
 }
+// zrobic exit
+// karty mają być ładne

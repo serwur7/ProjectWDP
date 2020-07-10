@@ -7,7 +7,7 @@ namespace BlackJack
 
     public class Deck
     {
-        List<string> figures = new List<string> { "T", "K", "R", "P" };
+        enum Figures { T, K, R, P };
         List<string> values = new List<string> {
         "2",
         "3",
@@ -32,7 +32,7 @@ namespace BlackJack
         public void shuffle()
         {
             deck.Clear();
-            foreach (string figure in figures)
+            foreach (Figures figure in Enum.GetValues(typeof(Figures)))
             {
                 foreach (string value in values)
                 {
@@ -40,19 +40,19 @@ namespace BlackJack
                 }
             }
 
-            
+
         }
 
         public string drawCard()
         {
             Random rnd = new Random();
-            int limit = deck.Count-1;
+            int limit = deck.Count - 1;
             int index = rnd.Next(0, limit);
             limit--;
             string card = deck[index];
             deck.RemoveAt(index);
             return card;
-            }
+        }
         public void show()
         {
             foreach (string card in deck)
@@ -61,6 +61,4 @@ namespace BlackJack
             }
         }
     }
-   
-
 }
