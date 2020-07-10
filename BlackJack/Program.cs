@@ -11,15 +11,15 @@ namespace BlackJack
     {
         static void Main(string[] args)
         {
-           /* Deck deck = new Deck();
-            //deck.shuffle();
+            /* Deck deck = new Deck();
+             //deck.shuffle();
 
-            Hand hand = new Hand();
-            hand.addCard(deck.drawCard());
-            Console.WriteLine(hand.cardsInHand[0]);
-            Console.WriteLine(hand.handValue);*/
+             Hand hand = new Hand();
+             hand.addCard(deck.drawCard());
+             Console.WriteLine(hand.cardsInHand[0]);
+             Console.WriteLine(hand.handValue);*/
 
-            while(true)
+            while (true)
             {
                 Deck deck = new Deck();
                 Hand player = new Hand();
@@ -31,67 +31,92 @@ namespace BlackJack
                 bool dealerEnd = false;
                 bool playerEnd = false;
                 bool check = true;
+                string no_winner = "0";
 
-                if (compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd) == true)
+
+                if (compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd) != no_winner)
                 {
+                    Console.WriteLine("Krupier:");
+                    showHand(dealer, false);
+                    Console.WriteLine("\nGracz:");
+                    showHand(player, true);
+                    Console.WriteLine("");
+
                     check = false;
-                    
-                    showHand(dealer, false, true);
-                    showHand(player, true, true);
                     Console.WriteLine("Press any key to continue. . . ");
                     Console.ReadLine();
                     Console.Clear();
                 }
 
+
                 while (check)
                 {
-                    showHand(dealer, false, true);
-                    showHand(player, true, true);
-                    if (dealerEnd == false)
+                    Console.WriteLine("Krupier:");
+                    showHand(dealer, false);
+                    Console.WriteLine("\nGracz:");
+                    showHand(player, true);
+                    Console.WriteLine("");
+                    Console.WriteLine("Press any key to continue. . . ");
+                    Console.ReadLine();
+                    Console.Clear();
+
+                    if (dealer.handValue < 17)
                     {
-                        if (dealer.handValue < 17) ///diler dobiera karty dopoki nie skonczy grac
+                        dealer.addCard(deck.drawCard());
+                        Console.Clear();
+                        Console.WriteLine("Krupier:");
+                        showHand(dealer, false);
+                        Console.WriteLine("\nGracz:");
+                        showHand(player, true);
+                        Console.WriteLine("");
+                        Console.WriteLine("Krupier dobrał kartę.");
+                        Console.WriteLine("Press any key to continue. . . ");
+                        Console.ReadLine();
+
+                        if (compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd) != no_winner)
                         {
-                            Console.WriteLine("Wcisnij dowolny klawisz zeby kontynuowac ");
+                            Console.Clear();
+                            Console.WriteLine("Krupier:");
+                            showHand(dealer, false, true);
+                            Console.WriteLine("\nGracz:");
+                            Console.WriteLine("");
+                            showHand(player, true, true);
+                            Console.WriteLine("");
+                            Console.WriteLine(compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd));
+                            Console.WriteLine("Wciśnij dowolny klawisz by rozpocząć nową rozgrywkę.");
                             Console.ReadLine();
                             Console.Clear();
-                            Console.WriteLine("DILER dobrał karte.....");
-                            dealer.addCard(deck.drawCard());
-                            if (compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd) == true)
-                            {
-                                showHand(dealer, false, true);
-                                showHand(player, true, true);
-                                Console.WriteLine("Press any key to continue. . . ");
-                                Console.ReadLine();
-                                Console.Clear();
-                                if (dealer.handValue != 21)
-                                {
-                                    
-                                    break;
-                                }
-                            }
-
-                        }///jak diler dobiera karty jest ok a jak nie chce to wydupca duzo rzeczy na ekran
-                        ///najs
-                        else
-                        {
-                            Console.WriteLine("DILER zakonczyl dobieranie kart");
-                            dealerEnd = true;
+                            break;
                         }
                     }
-                    showHand(dealer, false);
-                    showHand(player, true);
-                    if (playerEnd == false)
+                    else
+                    {
+                        dealerEnd = true;
+                        Console.Clear();
+                        Console.WriteLine("Krupier:");
+                        showHand(dealer, false);
+                        Console.WriteLine("\nGracz:");
+                        showHand(player, true);
+                        Console.WriteLine("");
+                        Console.WriteLine("Krupier nie dobiera.");
+                    }
+
+                    if (!playerEnd)
                     {
                         Console.WriteLine("Czy chciałbyś dobrać kartę?(t/n)");
                         if (Console.ReadLine() == "t")
                         {
                             Console.Clear();
                             player.addCard(deck.drawCard());
-                            if (compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd) == true)
+                            if (compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd) != no_winner)
                             {
+                                Console.WriteLine("Krupier:");
                                 showHand(dealer, false, true);
+                                Console.WriteLine("\nGracz:");
                                 showHand(player, true, true);
-                                Console.WriteLine("Press any key to continue. . . ");
+                                Console.WriteLine("");
+                                Console.WriteLine(compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd));
+                                Console.WriteLine("Wciśnij dowolny klawisz by rozpocząć nową rozgrywkę.");
                                 Console.ReadLine();
                                 Console.Clear();
                                 break;
@@ -99,71 +124,74 @@ namespace BlackJack
                         }
                         else
                         {
-                            Console.WriteLine("Końcowa wartość kart w Twojej ręce to: " + player.handValue);
                             playerEnd = true;
+                            Console.Clear();
                         }
+
                     }
-                    if (dealerEnd && playerEnd)
+
+
+                    if (playerEnd == true && dealerEnd == true)
                     {
-                        compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd);
-                        Console.WriteLine("Wcisnij dowolny klawisz zeby kontynuowac ");
+                        Console.Clear();
+                        Console.WriteLine("Krupier:");
+                        showHand(dealer, false, true);
+                        Console.WriteLine("\nGracz:");
+                        showHand(player, true, true);
+                        Console.WriteLine("");
+                        Console.WriteLine(compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd));
+                        Console.WriteLine("Wciśnij dowolny klawisz by rozpocząć nową rozgrywkę.");
                         Console.ReadLine();
                         Console.Clear();
                         break;
                     }
                 }
-                
             }
         }
 
-        public static bool compareHands(int p, int d,bool de, bool pe)
+
+
+        public static string compareHands(int p, int d, bool de, bool pe)
         {
-            if(p == 21)
+            if (p == 21)
             {
-                if(d == 21)
+                if (d == 21)
                 {
-                    Console.WriteLine("Remis....");
-                    return true;
+                    return "Remis....";
                 }
-                Console.WriteLine("Gracz zwyciężył!");
-                return true;
+                return "Gracz zwyciężył!";
             }
-            else if(p > 21)
+            else if (p > 21)
             {
-                Console.WriteLine("Gracz przekroczył 21 i przegrywa");
-                return true;
+                return "Gracz przekroczył 21 i przegrywa";
             }
-            else if(d > 21)
+            else if (d > 21)
             {
-                Console.WriteLine("DILER przekroczył 21 i przegrywa");
-                return true;
+                return "DILER przekroczył 21 i przegrywa";
             }
-            else if(d == 21)
+            else if (d == 21)
             {
-               //Console.WriteLine("Diler wygrał...");
-               return true;
+                return "Diler wygrał...";
             }
-            else if(de && pe)
+            else if (de && pe)
             {
-                if(p > d)
+                if (p > d)
                 {
-                    Console.WriteLine("Gracz wygrał");
+                    return "Gracz wygrał";
                 }
                 else if (d > p)
                 {
-                    Console.WriteLine("DILER wygrał");
+                    return "DILER wygrał";
                 }
                 else
                 {
-                    Console.WriteLine("REMIS!");
+                    return "REMIS!";
                 }
-                return true;
             }
-
-            return false;
+            return "0";
         }
 
-        public static void showHand(Hand hand, bool isPlayer, bool endGame=false)
+        public static void showHand(Hand hand, bool isPlayer, bool endGame = false)
         {
 
             foreach (string karta in hand.cardsInHand)
@@ -175,10 +203,10 @@ namespace BlackJack
                 }
                 else
                 {
-                    Console.WriteLine(" * ");
+                    Console.Write(" * ");
                 }
             }
-            Console.WriteLine("Wartosc ręki wynosi: " + hand.handValue);
+            Console.WriteLine("\nWartosc ręki wynosi: " + hand.handValue);
         }
     }
 }
