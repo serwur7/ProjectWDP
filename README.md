@@ -13,8 +13,8 @@ Projekt ma bardzo prostą strukturę. W jej skład wchodzą trzy klasy:
  - showHand  - wyświetlająca karty które dany gracz ma w ręcę w danej rozgrywce(karty dilera wyświetlane są dopiero po zakończeniu danej rozgrywki)
  
 2. Hand - odpowiada za przechowywanie informacji o ręce(kartach) danego gracza, posiada też funkcje:
--handValue która sumuje "wartość" ręki danego gracza w danej rozgrywce BlackJacka(gdy gracz ma więcej niz 10 pkt As liczony jest jako 1, gdy mniej - jako 11)
--listę cardsInHand przechowującą karty znajdujace się w ręce danego gracza
+-  handValue która sumuje "wartość" ręki danego gracza w danej rozgrywce BlackJacka(gdy gracz ma więcej niz 10 pkt As liczony jest jako 1, gdy mniej - jako 11)
+-  listę cardsInHand przechowującą karty znajdujace się w ręce danego gracza
 
 3. Deck -odpowiada za przechowywanie talii używanej do obecnej rozgrywki i tasowanie jej po zakończonej rozgrywce,jej funkcje to
 - shuffle - "tasuje" talie - robi nową listę wszystkich kombinacji figura+ wartosc
