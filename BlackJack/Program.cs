@@ -11,15 +11,7 @@ namespace BlackJack
     {
         static void Main(string[] args)
         {
-            /* Deck deck = new Deck();
-             //deck.shuffle();
-
-             Hand hand = new Hand();
-             hand.addCard(deck.drawCard());
-             Console.WriteLine(hand.cardsInHand[0]);
-             Console.WriteLine(hand.handValue);*/
-
-            while (true)
+            while (true)        
             {
                 Deck deck = new Deck();
                 Hand player = new Hand();
@@ -43,7 +35,7 @@ namespace BlackJack
                     Console.WriteLine("");
 
                     check = false;
-                    Console.WriteLine("Press any key to continue. . . ");
+                    Console.WriteLine("Wcisnij klawisz aby kontynuowac. . . ");
                     Console.ReadLine();
                     Console.Clear();
                 }
@@ -56,7 +48,7 @@ namespace BlackJack
                     Console.WriteLine("\nGracz:");
                     showHand(player, true);
                     Console.WriteLine("");
-                    Console.WriteLine("Press any key to continue. . . ");
+                    Console.WriteLine("Wcisnij klawisz aby kontynuowac. . . ");
                     Console.ReadLine();
                     Console.Clear();
 
@@ -70,7 +62,7 @@ namespace BlackJack
                         showHand(player, true);
                         Console.WriteLine("");
                         Console.WriteLine("Krupier dobrał kartę.");
-                        Console.WriteLine("Press any key to continue. . . ");
+                        Console.WriteLine(". . . ");
                         Console.ReadLine();
 
                         if (compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd) != no_winner)
@@ -79,12 +71,10 @@ namespace BlackJack
                             Console.WriteLine("Krupier:");
                             showHand(dealer, false, true);
                             Console.WriteLine("\nGracz:");
-                            Console.WriteLine("");
                             showHand(player, true, true);
                             Console.WriteLine("");
                             Console.WriteLine(compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd));
                             Console.WriteLine("Wciśnij dowolny klawisz by rozpocząć nową rozgrywkę.");
-
                             Console.ReadLine();
                             Console.Clear();
                             break;
@@ -197,26 +187,41 @@ namespace BlackJack
 
             foreach (string karta in hand.cardsInHand)
             {
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Black;
                 if (isPlayer || endGame)
                 {
-                    Console.Write(karta + " ");
+                    if (karta[karta.Length - 1] == 'K' || karta[karta.Length - 1] == 'R')
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+
+                    Console.Write(karta);
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.Write(" ");
 
                 }
                 else
                 {
-                    Console.Write(" * ");
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.Write("*");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.Write(" ");
                 }
             }
+
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+
             if (isPlayer || endGame)
             {
                 Console.WriteLine("\nWartosc ręki wynosi: " + hand.handValue);
+
             }
             else
             {
-                Console.WriteLine("\nWartosc ręki wynosi: xXx");
+                Console.WriteLine("\nWartosc ręki wynosi: xx");
             }
         }
     }
 }
-// zrobic exit
-// karty mają być ładne
