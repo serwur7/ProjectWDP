@@ -28,7 +28,7 @@ namespace BlackJack
 
                 if (compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd) != no_winner)
                 {
-                    Console.WriteLine("Krupier:");
+                    Console.WriteLine("Diler:");
                     showHand(dealer, false);
                     Console.WriteLine("\nGracz:");
                     showHand(player, true);
@@ -43,7 +43,7 @@ namespace BlackJack
 
                 while (check)
                 {
-                    Console.WriteLine("Krupier:");
+                    Console.WriteLine("Diler:");
                     showHand(dealer, false);
                     Console.WriteLine("\nGracz:");
                     showHand(player, true);
@@ -56,19 +56,19 @@ namespace BlackJack
                     {
                         dealer.addCard(deck.drawCard());
                         Console.Clear();
-                        Console.WriteLine("Krupier:");
+                        Console.WriteLine("Diler:");
                         showHand(dealer, false);
                         Console.WriteLine("\nGracz:");
                         showHand(player, true);
                         Console.WriteLine("");
-                        Console.WriteLine("Krupier dobrał kartę.");
+                        Console.WriteLine("Diler dobrał kartę.");
                         Console.WriteLine(". . . ");
                         Console.ReadLine();
 
                         if (compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd) != no_winner)
                         {
                             Console.Clear();
-                            Console.WriteLine("Krupier:");
+                            Console.WriteLine("Diler:");
                             showHand(dealer, false, true);
                             Console.WriteLine("\nGracz:");
                             showHand(player, true, true);
@@ -84,7 +84,7 @@ namespace BlackJack
                     {
                         dealerEnd = true;
                         Console.Clear();
-                        Console.WriteLine("Krupier:");
+                        Console.WriteLine("Diler:");
                         showHand(dealer, false);
                         Console.WriteLine("\nGracz:");
                         showHand(player, true);
@@ -101,7 +101,7 @@ namespace BlackJack
                             player.addCard(deck.drawCard());
                             if (compareHands(player.handValue, dealer.handValue, dealerEnd, playerEnd) != no_winner)
                             {
-                                Console.WriteLine("Krupier:");
+                                Console.WriteLine("Diler:");
                                 showHand(dealer, false, true);
                                 Console.WriteLine("\nGracz:");
                                 showHand(player, true, true);
@@ -125,7 +125,7 @@ namespace BlackJack
                     if (playerEnd == true && dealerEnd == true)
                     {
                         Console.Clear();
-                        Console.WriteLine("Krupier:");
+                        Console.WriteLine("Diler:");
                         showHand(dealer, false, true);
                         Console.WriteLine("\nGracz:");
                         showHand(player, true, true);
